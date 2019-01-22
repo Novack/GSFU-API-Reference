@@ -1,0 +1,1807 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Class Drive</title>
+        <style>
+            /*
+            * Copyright 2007 - 2009 Marek St�j
+            * 
+            * This file is part of ImmDoc .NET.
+            *
+            * ImmDoc .NET is free software; you can redistribute it and/or modify
+            * it under the terms of the GNU General Public License as published by
+            * the Free Software Foundation; either version 2 of the License, or
+            * (at your option) any later version.
+            *
+            * ImmDoc .NET is distributed in the hope that it will be useful,
+            * but WITHOUT ANY WARRANTY; without even the implied warranty of
+            * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+            * GNU General Public License for more details.
+            *
+            * You should have received a copy of the GNU General Public License
+            * along with ImmDoc .NET; if not, write to the Free Software
+            * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+            */
+            /*****************************************************************************
+            *                                 Main                                      *
+            *****************************************************************************/
+            body
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 8pt;
+            color: #000000;
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            max-height:100%; 
+            //overflow: hidden;
+            }
+            /*****************************************************************************
+            *                                 Links                                     *
+            *****************************************************************************/
+            a
+            {
+            color: #0000ff;
+            }
+            a:visited
+            {
+            color: #0000ff;
+            }
+            a:hover
+            {
+            color: #3366ff;
+            }
+            a#ContentsAnchor
+            {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            }
+            /*****************************************************************************
+            *                                  Divs                                     *
+            *****************************************************************************/
+            div#Header
+            {
+            position:absolute; 
+            //top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 45px; 
+            //overflow: auto; 
+            background-color: #d4dfff;
+            border-bottom: solid #c8cdde 1px;
+            }
+            div#HeaderToolbar
+            {
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: #d4dfff;
+            padding-top: 2px;
+            }
+            div#ProjectTitle
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 7.5pt;
+            color: #003399;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 05px;
+            margin-bottom: 3px;
+            }
+            div#PageTitle
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #003399;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 5px;	
+            }
+            div#HeaderShortcuts
+            {
+            padding-left: 15px;
+            margin-bottom: 4px;
+            margin-top: 3px;
+            }
+            div#Contents
+            {
+            //position: fixed; 
+            top: 45px;
+            left: 0;
+            bottom: 18px; 
+            * bottom: 15px; /* Hack for IE */
+            right: 0; 
+            //overflow:auto; 
+            margin: 0px;
+            padding: 15px;
+            padding-top: 15px;
+            }
+            div#Footer
+            {
+            position: absolute; 
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: 14px;
+            overflow: hidden;
+            border-top: solid #bec7e4 1px;
+            padding-bottom: 3px;
+            margin-left: 0px;
+            margin-right: 0px;
+            }
+            div#ItemLocation
+            {
+            margin: 0px;
+            padding: 0px;
+            margin-top: 10px;
+            }
+            p + div#ItemLocation
+            {
+            margin-top: 0px;
+            }
+            div.SectionContainer
+            {
+            padding-left: 17px;
+            padding-right: 17px;
+            _width: 100%; /* Hack for IE 6 and below */
+            }
+            div.SectionHeader
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 11pt;
+            color: #003399;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            }
+            div.CommentHeader
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 10pt;
+            color: #000000;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 2px;
+            }
+            div.CommentParameterName
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-style: italic;
+            margin: 0px;
+            padding: 0px;
+            margin-bottom: 2px;
+            margin-top: 10px;
+            }
+            div + div.CommentHeader
+            {
+            margin-top: 15px;
+            }
+            div.CommentHeader + div.CommentParameterName
+            {
+            margin-top: 5px;
+            }
+            p + div.CommentParameterName
+            {
+            margin-top: 5px;
+            }
+            div.DarkLine
+            {
+            border-top: solid #c8cdde 1px
+            }
+            div.LightLine
+            {
+            border-top: solid #ffffff 1px
+            }
+            div.RemarksContainer
+            {
+            margin: 0px;
+            padding: 0px;
+            margin-bottom: 10px;
+            }
+            div.ParameterCommentContainer
+            {
+            margin: 0px;
+            padding: 0px;
+            margin-bottom: 10px;
+            }
+            div.TopLink
+            {
+            margin-top: 10px;
+            }
+            /*****************************************************************************
+            *                                 Tables                                    *
+            *****************************************************************************/
+            table.MembersTable
+            {
+            width: 100%;
+            }
+            table.MembersTable th
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 8pt;
+            color: #000066;
+            font-weight: bold;
+            background-color: #efeff7;
+            border-bottom: solid #c8cdde 1px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: left;
+            }
+            table.MembersTable td
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 8pt;
+            color: #000000;
+            background-color: #f7f7ff;
+            border-bottom: solid #d5d5d3 1px;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 10px;
+            text-align: left;
+            }
+            table.MembersTable td.IconColumn
+            {
+            padding-right: 5px;
+            white-space: nowrap;
+            }
+            table.CodeTable
+            {
+            width: 100%;
+            margin-bottom: 0px;
+            font-family: Courier New, Monospace;
+            font-size: 9pt;
+            }
+            table.ExampleCodeTable
+            {
+            width: 100%;
+            margin-bottom: 0px;
+            font-family: Courier New, Monospace;
+            font-size: 9pt;
+            margin-top: 12px;
+            }
+            p + table.ExampleCodeTable
+            {
+            margin-top: 0px;
+            }
+            th.CodeTable
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 8pt;
+            color: #000066;
+            font-weight: bold;
+            background-color: #efeff7;
+            border-bottom: solid #c8cdde 1px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: left;
+            }
+            td.CodeTable
+            {
+            color: #000066;
+            background-color: #f7f7ff;
+            border-bottom: solid #d5d5d3 1px;
+            padding-top: 5px;
+            padding-bottom: 15px;
+            padding-left: 5px;
+            padding-right: 10px;
+            text-align: left;
+            }
+            table.InsideCodeBlock
+            {
+            font-size: 9pt;
+            margin: 0px;
+            padding: 0px;
+            }
+            table.InsideCodeBlock tr
+            {
+            margin: 0px;
+            padding: 0px;
+            }
+            table.InsideCodeBlock td
+            {
+            margin: 0px;
+            padding: 0px;
+            border: none;
+            }
+            td.NoWrapTop
+            {
+            white-space: nowrap;
+            vertical-align: top;
+            }
+            /*****************************************************************************
+            *                                  Spans                                    *
+            *****************************************************************************/
+            span#ExpandCollapseAllSpan
+            {
+            color: #0000ff;
+            cursor: default;
+            }
+            span.SectionHeader
+            {
+            margin-left: 4px;
+            }
+            span.Footer
+            {
+            font-family: Verdana, Tahoma, Arial, Sans-Serif;
+            font-size: 7.5pt;
+            margin: 0px;
+            margin-left: 5px;
+            padding: 0px;
+            padding-bottom: 5px;
+            }
+            span.PseudoLink
+            {
+            }
+            span.Code
+            {
+            font-family: Courier New, Monospace;
+            }
+            span.SeeAlsoInSectionHeader
+            {
+            font-size: 9pt;
+            }
+            /*****************************************************************************
+            *                                  Paragraphs                               *
+            *****************************************************************************/
+            p
+            {
+            text-align: justify;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin: 0px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            }
+            a#ContentsAnchor + p
+            {
+            margin-top: 0px;
+            }
+            td p
+            {
+            margin: 0px;
+            padding: 0px;
+            }
+            div.ParameterCommentContainer p
+            {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            }
+            /*****************************************************************************
+            *                                    Other                                  *
+            *****************************************************************************/
+            pre
+            {
+            font-family: Courier New, Monospace;
+            font-size: 9pt;
+            margin: 0px;
+            padding: 0px;
+            }
+            ul
+            {
+            padding: 0px;
+            margin: 0px;
+            padding-left: 30px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            }
+            ol
+            {
+            padding: 0px;
+            margin: 0px;
+            padding-left: 30px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            }
+            /*****************************************************************************
+            *                                  General classes                          *
+            *****************************************************************************/
+            .ArrowCursor
+            {
+            cursor: default;
+            }
+            .NoTopMargin
+            {
+            margin-top: 0px;
+            }
+            .WithWrapping
+            {
+            white-space: normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="height: 100%;
+            width: 13%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 5px;
+            padding-left: 20px;
+            left: 0;">
+            <h2 style="color:blue;">Google Drive For Unity</h2>
+            <h3 style="color:grey;">API Reference</h3>
+            <h4>Drive Class</h4>
+            <h5>Methods</h5>
+            <div style="padding-left: 10px;">
+                <p><a href="#CreateBinaryFile">CreateBinaryFile()</a></p>
+                <p><a href="#CreateCredentialsTable">CreateCredentialsTable()</a></p>
+                <p><a href="#CreateFolder">CreateFolder()</a></p>
+                <p><a href="#CreateImageFile">CreateImageFile()</a></p>
+                <p><a href="#CreateTable">CreateTable()</a></p>
+                <p><a href="#CreateTextFile">CreateTextFile()</a></p>
+                <p><a href="#CreateObject">CreateObject()</a></p>
+                <p><a href="#CreateObject2" style="padding-left: 10px;">Overload</a></p>
+                <p><a href="#CreateObjects">CreateObjects()</a></p>
+                <p><a href="#DeleteFile">DeleteFile()</a></p>
+                <p><a href="#DeleteFolderById">DeleteFolderById()</a></p>
+                <p><a href="#DeleteFolderByName">DeleteFolderByName()</a></p>
+                <p><a href="#DeleteObjects">DeleteObjects()</a></p>
+                <p><a href="#GetAllTables">GetAllTables()</a></p>
+                <p><a href="#GetBinaryFile">GetBinaryFile()</a></p>
+                <p><a href="#GetCellValue">GetCellValue()</a></p>
+                <p><a href="#GetImageFile">GetImageFile()</a></p>
+                <p><a href="#GetObjectsByField">GetObjectsByField()</a></p>
+                <p><a href="#GetTable">GetTable()</a></p>
+                <p><a href="#GetTextFile">GetTextFile()</a></p>
+                <p><a href="#Login">Login()</a></p>
+                <p><a href="#Logout">Logout()</a></p>
+                <p><a href="#SetCellValue">SetCellValue()</a></p>
+                <p><a href="#Signup">Signup()</a></p>
+                <p><a href="#UpdateObjects">UpdateObjects()</a></p>
+            </div>
+            <h5>Events</h5>
+            <div style="padding-left: 10px;">
+                <p><a href="#responseCallback">responseCallback</a></p>
+                <p><a href="#errorResponseCallback">errorResponseCallback</a></p>
+            </div>
+            <h5>Enums</h5>
+            <div style="padding-left: 10px;">
+                <p><a href="#QueryType">QueryType</a></p>
+            </div>
+            </br></br> 
+            <div>
+                <p><a href="https://novack.itch.io/google-sheets-for-unity">← Back to asset page</a></p>
+            </div>
+            </br></br> 
+        </div>
+        <div style="height: 100%;
+            width: 85%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            right: 0;">
+        <p id="CreateObject">	
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateObject Method</div>
+        <div id="Contents" />
+        Will create a new object (new row in a worksheet) with the specified json data.
+        Expects a json string with the object, as well as the type/table name.
+        If not all fields of the type are passed, those missing will be filled as "null".
+        Fields passed but not in the table, will be ignored.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateObject(string jsonObject, string objTypeName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>jsonObject</div>
+            <div class='ParameterCommentContainer'>
+                Json string with the object to be persisted.
+            </div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table that will hold the object.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateObject2">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateObject Method</div>
+        <div id="Contents" />
+        Will create a new object (new row in a worksheet) with the specified field values.
+        Expects a dictionary of field names and values to be stored, as well as the type/table name.
+        If not all type fields available in the table are passed, those missing will be filled as "null".
+        Fields passed but not in the table, will be ignored.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateObject(Dictionary&lt;string, string&gt; fields, string objTypeName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>fields</div>
+            <div class='ParameterCommentContainer'>
+                Dictionary of field names and values to be stored.
+            </div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table that will hold the object.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateObjects">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateObjects Method</div>
+        <div id="Contents" />
+        Will create a number of objects (rows in a worksheet) from the specified json data.
+        Expects a json string with the array of objects, as well as the type/table name.
+        If not all type fields available in the table are passed, those missing will be filled as "null".
+        Fields passed but not in the table, will be ignored.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateObjects(string jsonObjects, string objTypeName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>jsonObjects</div>
+            <div class='ParameterCommentContainer'>
+                Json string with the object to be persisted.
+            </div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table that will hold the object.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateTable">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateTable Method</div>
+        <div id="Contents" />
+        Will create a new table (new worksheet on the spreadsheet) with the specified name and headers.
+        Expects an array of field names/headers, as well as the type/table name to be used.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateTable(string[] headers, string tableTypeName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>fields</div>
+            <div class='ParameterCommentContainer'>
+                String array with the names of the table headers.
+            </div>
+            <div class='CommentParameterName'>tableTypeName</div>
+            <div class='ParameterCommentContainer'>
+                The name of the table to be created.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetObjectsByField">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetObjectsByField Method</div>
+        <div id="Contents" />
+        Retrieves from the spreadsheet an array of objects found by searching with the specified criteria.
+        Expects the table name, the name of the field to search by, and the value to search.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetObjectsByField(string objTypeName, string searchFieldName, string searchValue, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table to search.
+            </div>
+            <div class='CommentParameterName'>searchFieldName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the field to search by.
+            </div>
+            <div class='CommentParameterName'>searchValue</div>
+            <div class='ParameterCommentContainer'>
+                Value to search for.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetCellValue">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetCellValue Method</div>
+        <div id="Contents" />
+        Retrieves from the spreadsheet an object by looking into a specified cell.
+        Expects the table name, the column and row.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetCellValue(string objTypeName, string column, string row, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table to search.
+            </div>
+            <div class='CommentParameterName'>column</div>
+            <div class='ParameterCommentContainer'>
+                Cell column.
+            </div>
+            <div class='CommentParameterName'>row</div>
+            <div class='ParameterCommentContainer'>
+                Cell row.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetTable">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetTable Method</div>
+        <div id="Contents" />
+        Retrieves from the spreadsheet an array of all the objects found in the specified table.
+        Expects the table name.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetTable(string tableTypeName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>tableTypeName</div>
+            <div class='ParameterCommentContainer'>
+                The name of the table to be retrieved.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetAllTables">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetAllTables Method</div>
+        <div id="Contents" />
+        Retrieves from the spreadsheet the data from all tables, in the form of one or more array of objects.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetAllTables(bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="UpdateObjects">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">UpdateObjects Method</div>
+        <div id="Contents" />
+        Updates one or more objects found by searching with the specified criteria.
+        Expects the table name, the name of the field to search by, and the value to search,
+        as well as the object in json format to be updated in the matching objects.
+        The json must contain only those fields that one to be updated.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void UpdateObjects(string objTypeName, string searchFieldName, string searchValue, string jsonObject, bool create, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table to search.
+            </div>
+            <div class='CommentParameterName'>searchFieldName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the field to search by.
+            </div>
+            <div class='CommentParameterName'>searchValue</div>
+            <div class='ParameterCommentContainer'>
+                Value to search for.
+            </div>
+            <div class='CommentParameterName'>jsonObject</div>
+            <div class='ParameterCommentContainer'>
+                Json string with the object to be updated.
+            </div>
+            <div class='CommentParameterName'>create</div>
+            <div class='ParameterCommentContainer'>
+                Indicates whether a new object should be created with the json data provided, in the case that no objects are found matching the search criteria.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="SetCellValue">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">SetCellValue Method</div>
+        <div id="Contents" />
+        Updates a cell value specified by column and row coordinates.
+        Expects the table name, the column and row coordinates, and the new value to be set.
+        * Setting values by table cell coordinates is unsafe and error prone, to be used only on very specific scenarios. *
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void SetCellValue(string objTypeName, string column, string row, string value, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table to search.
+            </div>
+            <div class='CommentParameterName'>column</div>
+            <div class='ParameterCommentContainer'>
+                Cell column.
+            </div>
+            <div class='CommentParameterName'>row</div>
+            <div class='ParameterCommentContainer'>
+                Cell row.
+            </div>
+            <div class='CommentParameterName'>value</div>
+            <div class='ParameterCommentContainer'>
+                New value to be set.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="DeleteObjects">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">DeleteObjects Method</div>
+        <div id="Contents" />
+        Deletes one or more objects (rows) from a table (worksheet) found by searching with the specified criteria.
+        Expects the table name, the name of the field to search by, and the value to search.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void DeleteObjects(string objTypeName, string searchFieldName, string searchValue, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>objTypeName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the table to search.
+            </div>
+            <div class='CommentParameterName'>searchFieldName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the field to search by.
+            </div>
+            <div class='CommentParameterName'>searchValue</div>
+            <div class='ParameterCommentContainer'>
+                Value to search for.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetBinaryFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetBinaryFile Method</div>
+        <div id="Contents" />
+        Retrieves a binary file by its Drive file id.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetBinaryFile(string id, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>id</div>
+            <div class='ParameterCommentContainer'>
+                Drive id of the file to retieve.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetTextFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetTextFile Method</div>
+        <div id="Contents" />
+        Retrieves a text file by its Drive file id.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetTextFile(string id, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>id</div>
+            <div class='ParameterCommentContainer'>
+                Drive id of the file to retieve.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="GetImageFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">GetImageFile Method</div>
+        <div id="Contents" />
+        Retrieves an image file by its Drive file id.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void GetImageFile(string id, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>id</div>
+            <div class='ParameterCommentContainer'>
+                Drive id of the file to retrieve.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateImageFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateImageFile Method</div>
+        <div id="Contents" />
+        Creates a file with an specified name, format, and quality.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateImageFile(Texture2D texture, string name, bool usePNG = true, int jpgQuality = 90, string folderName = null, string folderId = null, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>name</div>
+            <div class='ParameterCommentContainer'>
+                Name of the image file to create.
+            </div>
+            <div class='CommentParameterName'>usePNG</div>
+            <div class='ParameterCommentContainer'>
+                Flag for the image format. Use true for PNG (default), or false for JPG.
+            </div>
+            <div class='CommentParameterName'>jpgQuality</div>
+            <div class='ParameterCommentContainer'>
+                Used if JPG format is set. Expects a value from 1 to 100.
+            </div>
+            <div class='CommentParameterName'>folderName</div>
+            <div class='ParameterCommentContainer'>
+                Optional name of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>folderId</div>
+            <div class='ParameterCommentContainer'>
+                Optional id of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateBinaryFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateBinaryFile Method</div>
+        <div id="Contents" />
+        Creates a file with an specified name, format, and quality.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateBinaryFile(byte[] fileData, string fileName, string folderName = null, string folderId = null, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>fileData</div>
+            <div class='ParameterCommentContainer'>
+                File contents.
+            </div>
+            <div class='CommentParameterName'>fileName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the image file to create.
+            </div>
+            <div class='CommentParameterName'>folderName</div>
+            <div class='ParameterCommentContainer'>
+                Optional name of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>folderId</div>
+            <div class='ParameterCommentContainer'>
+                Optional id of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateTextFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateTextFile Method</div>
+        <div id="Contents" />
+        Creates a file with an specified name, format, and quality.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateTextFile(string fileData, string fileName, string folderName = null, string folderId = null, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>fileData</div>
+            <div class='ParameterCommentContainer'>
+                File contents.
+            </div>
+            <div class='CommentParameterName'>fileName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the image file to create.
+            </div>
+            <div class='CommentParameterName'>folderName</div>
+            <div class='ParameterCommentContainer'>
+                Optional name of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>folderId</div>
+            <div class='ParameterCommentContainer'>
+                Optional id of the folder to which the file should be added.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="DeleteFile">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">DeleteFile Method</div>
+        <div id="Contents" />
+        Deletes a file specified by its id.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void DeleteFile(string fileId, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>fileId</div>
+            <div class='ParameterCommentContainer'>
+                Drive id of the file to delete.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateFolder">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateFolder Method</div>
+        <div id="Contents" />
+        Creates a file with an specified name, format, and quality.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateFolder(string folderName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>folderName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the folder to be created.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="DeleteFolderByName">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">DeleteFolderByName Method</div>
+        <div id="Contents" />
+        Deletes a file specified by its name.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void DeleteFolderByName(string folderName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>folderName</div>
+            <div class='ParameterCommentContainer'>
+                Name of the folder to delete.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="DeleteFolderById">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">DeleteFolderById Method</div>
+        <div id="Contents" />
+        Deletes a file specified by its id.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void DeleteFolderById(string folderId, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>folderId</div>
+            <div class='ParameterCommentContainer'>
+                Drive id of the folder to delete.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="CreateCredentialsTable">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">CreateCredentialsTable Method</div>
+        <div id="Contents" />
+        Will create a new table (new worksheet on the spreadsheet) used by the sessions API (signup and login).
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void CreateCredentialsTable(string tableName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>tableName</div>
+            <div class='ParameterCommentContainer'>
+                The name of the table that will be used to store the users data.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="Signup">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Signup Method</div>
+        <div id="Contents" />
+        Sends a signup request, along with the base information required.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void Signup(string userName, string email, string pass, string id, string tableName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>userName</div>
+            <div class='ParameterCommentContainer'>
+                The username that will be used for login.
+            </div>
+            <div class='CommentParameterName'>email</div>
+            <div class='ParameterCommentContainer'>
+                The email address of the user.
+            </div>
+            <div class='CommentParameterName'>pass</div>
+            <div class='ParameterCommentContainer'>
+                The password for the account to be created.
+            </div>
+            <div class='CommentParameterName'>id</div>
+            <div class='ParameterCommentContainer'>
+                A value that can be used optionally for internal unique identification purposes.
+            </div>
+            <div class='CommentParameterName'>tableName</div>
+            <div class='ParameterCommentContainer'>
+                The name of the table holding the users data.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="Login">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Login Method</div>
+        <div id="Contents" />
+        Sends a dynamic (data provided at runtime) login request, to start a session.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static void Login(string userName, string pass, string tableName, bool runtime = true)</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class='CommentHeader'>Parameters</div>
+            <div class='CommentParameterName'>userName</div>
+            <div class='ParameterCommentContainer'>
+                The username that will be used for login.
+            </div>
+            <div class='CommentParameterName'>pass</div>
+            <div class='ParameterCommentContainer'>
+                The account password.
+            </div>
+            <div class='CommentParameterName'>tableName</div>
+            <div class='ParameterCommentContainer'>
+                The name of the table holding the users data.
+            </div>
+            <div class='CommentParameterName'>runtime</div>
+            <div class='ParameterCommentContainer'>
+                Bool value indicating if the request was sent from Unity Editor or running game.
+            </div>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="Logout">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Logout Method</div>
+        <div id="Contents" />
+        Sends a login request, to start a session. Username and session token are obtained (and sent) from the session context.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+        <table class='CodeTable'>
+            <colgroup>
+                <col width='100%'>
+            </colgroup>
+            <tbody>
+                <tr class='CodeTable'>
+                    <th class='CodeTable'>C#</th>
+                </tr>
+                <tr class='CodeTable'>
+                    <td class='CodeTable'>
+                        <pre style='margin-left: 2px;'>
+public static void Logout(bool runtime = true)</pre>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class='CommentHeader'>Parameters</div>
+        <div class='CommentParameterName'>runtime</div>
+        <div class='ParameterCommentContainer'>
+            Bool value indicating if the request was sent from Unity Editor or running game.
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="QueryType">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Enum QueryType</div>
+        <div id="Contents" />
+            List containing all query types.
+            Needed if want to make custom query methods, or adding new queries on the webservice.
+            <div id='SectionHeader0' class='SectionHeader'>
+                □
+                <span class='SectionHeader'>
+                <span class='ArrowCursor' >
+                □ Syntax
+                </span>
+                </span>
+            </div>
+            <div id='SectionContainerDiv0' class='SectionContainer'>
+                <table class='CodeTable'>
+                    <colgroup>
+                        <col width='100%'>
+                    </colgroup>
+                    <tbody>
+                        <tr class='CodeTable'>
+                            <th class='CodeTable'>C#</th>
+                        </tr>
+                        <tr class='CodeTable'>
+                            <td class='CodeTable'>
+                                <pre style='margin-left: 2px;'>
+public enum QueryType</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </p>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="responseCallback">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Field responseCallback</div>
+        <div id="Contents" />
+        Subscribe to this event to receive the response data from Google Drive.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static UnityAction&lt;DataContainer&gt; responseCallback</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </p>
+        <hr>
+        </hr></br></br> 
+        <p id="errorResponseCallback">   
+        <div id="Header">
+        <div id="ProjectTitle">Drive Class</div>
+        <div id="PageTitle">Field errorResponseCallback</div>
+        <div id="Contents" />
+        Subscribe to this event if you want to receive error callbacks.
+        <div id='SectionHeader0' class='SectionHeader'>
+            <span class='SectionHeader'>
+            <span class='ArrowCursor' >
+            □ Syntax
+            </span>
+            </span>
+        </div>
+        <div id='SectionContainerDiv0' class='SectionContainer'>
+            <table class='CodeTable'>
+                <colgroup>
+                    <col width='100%'>
+                </colgroup>
+                <tbody>
+                    <tr class='CodeTable'>
+                        <th class='CodeTable'>C#</th>
+                    </tr>
+                    <tr class='CodeTable'>
+                        <td class='CodeTable'>
+                            <pre style='margin-left: 2px;'>
+public static UnityAction&lt;string&gt; errorResponseCallback</pre>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </br></br> 
+    </body>
+</html>
+
